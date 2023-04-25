@@ -1,8 +1,4 @@
-# dev-C-
-dev c++
-
-
-## them 1 nut vao dau danh sach
+## them 1 node bât ki vao dau danh sach
 #include<stdio.h>
 
 // dinh nghia cau truc cua 1 node
@@ -58,83 +54,7 @@ int main()
     for(NODE *p=l.pHead; p!=NULL; p=p->pNext)
         printf("%d\t", p->data);
 }
-
-## them 1 nut vao cuoi danh sach
-#include <stdio.h>
-#include <stdlib.h>
-
-// d?nh nghia c?u trúc c?a m?t nút
-struct Node {
-    int data;
-    struct Node *next;
-};
-
-// d?nh nghia c?u trúc c?a danh sách liên k?t
-struct LinkedList {
-    struct Node *head;
-    struct Node *tail;
-};
-
-// hàm t?o m?t nút m?i
-struct Node *createNode(int data) {
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = NULL;
-    return newNode;
-}
-
-// hàm thêm m?t nút vào cu?i danh sách liên k?t
-void addToEnd(struct LinkedList *list, int data) {
-    // t?o m?t nút m?i
-    struct Node *newNode = createNode(data);
-
-    // ki?m tra xem danh sách có r?ng hay không
-    if (list->head == NULL) {
-        // n?u danh sách r?ng, nút m?i s? là nút d?u tiên c?a danh sách
-        list->head = newNode;
-        list->tail = newNode;
-    } else {
-        // n?u danh sách không r?ng, thêm nút m?i vào sau nút cu?i cùng
-        list->tail->next = newNode;
-        list->tail = newNode;
-    }
-}
-
-// hàm in ra các giá tr? c?a danh sách liên k?t
-void printList(struct LinkedList *list) {
-    struct Node *current = list->head;
-    while (current != NULL) {
-        printf("%d ", current->data);
-        current = current->next;
-    }
-}
-
-int main() {
-    // t?o m?t danh sách liên k?t r?ng
-    struct LinkedList list;
-    list.head = NULL;
-    list.tail = NULL;
-
-    // nh?p s? lu?ng node c?a danh sách
-    int n;
-    printf("Nhap so luong node cua danh sach: ");
-    scanf("%d", &n);
-
-    // thêm các nút vào cu?i danh sách
-    for (int i = 0; i < n; i++) {
-        int data;
-        printf("Nhap gia tri cua node %d: ", i + 1);
-        scanf("%d", &data);
-        addToEnd(&list, data);
-    }
-
-    // in ra các giá tr? c?a danh sách
-    printf("Danh sach vua nhap la: ");
-    printList(&list);
-
-    return 0;
-}
-## them 1 node bat ki` vao danh sach lien ket
+## them 1 node bat ki vào cuoi danh sach
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -219,3 +139,173 @@ int main() {
 
     return 0;
 }
+## them 1 node bat ki 1 cho bat ki
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node  
+{ 
+  int data; 
+  struct Node *next; 
+};
+
+void printList(struct Node* n)
+{
+  while (n != NULL)  
+  { 
+     printf("%d ", n->data); 
+     n = n->next; 
+  }
+}
+
+void push(struct Node** head_ref, int new_data) 
+{ 
+  struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
+  new_node->data = new_data; 
+  new_node->next = (*head_ref); 
+  (*head_ref) = new_node; 
+} 
+
+void insertNode(struct Node** head_ref, int new_data, int position) 
+{ 
+    // T?o node m?i
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
+    new_node->data = new_data; 
+  
+    // N?u danh sách r?ng ho?c position là 0
+    if (*head_ref == NULL || position == 0) 
+    { 
+        new_node->next = *head_ref; 
+        *head_ref = new_node; 
+        return; 
+    } 
+  
+    // Tìm node tru?c v? trí c?n chèn
+    struct Node* prev = *head_ref; 
+    for (int i=0; prev!=NULL && i<position-1; i++) 
+         prev = prev->next; 
+  
+    // N?u position l?n hon s? lu?ng node trong danh sách
+    if (prev == NULL) 
+         return; 
+  
+    // Thêm node m?i vào danh sách liên k?t
+    new_node->next = prev->next; 
+    prev->next = new_node; 
+} 
+
+int main() 
+{
+  struct Node* head = NULL;
+  int data, pos;
+
+  // T?o danh sách liên k?t t? d? li?u du?c nh?p vào t? bàn phím
+  for (int i = 0; i < 4; i++) {
+    printf("Nhap vao gia tri cho node thu %d: ", i+1);
+    scanf("%d", &data);
+    push(&head, data);
+  }
+
+  printf("Danh sach lien ket ban dau: "); 
+  printList(head); 
+
+  // Thêm node vào v? trí du?c nh?p t? bàn phím
+  printf("\nNhap vao vi tri cua node can them: ");
+  scanf("%d", &pos);
+  printf("Nhap vao gia tri cho node moi: ");
+  scanf("%d", &data);
+  insertNode(&head, data, pos-1);
+
+  printf("Danh sach lien ket sau khi them node moi tai vi tri %d: ", pos);
+  printList(head); 
+
+  return 0; 
+}
+## xoa 1 node bat ki
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node  
+{ 
+  int data; 
+  struct Node *next; 
+};
+
+void printList(struct Node* n)
+{
+  while (n != NULL)  
+  { 
+     printf("%d ", n->data); 
+     n = n->next; 
+  }
+}
+
+void push(struct Node** head_ref, int new_data) 
+{ 
+  struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
+  new_node->data = new_data; 
+  new_node->next = (*head_ref); 
+  (*head_ref) = new_node; 
+} 
+
+void deleteNode(struct Node** head_ref, int position) 
+{ 
+   // N?u danh sách r?ng
+   if (*head_ref == NULL) 
+      return; 
+  
+   // Luu gi? node hi?n t?i
+   struct Node* temp = *head_ref; 
+  
+    // N?u node c?n xóa là node d?u tiên
+    if (position == 0) 
+    { 
+        *head_ref = temp->next;   // Thay d?i node d?u tiên
+        free(temp);               // Gi?i phóng node c?n xóa
+        return; 
+    } 
+  
+    // Tìm node tru?c node c?n xóa
+    for (int i=0; temp!=NULL && i<position-1; i++) 
+         temp = temp->next; 
+  
+    // N?u position l?n hon s? lu?ng node trong danh sách
+    if (temp == NULL || temp->next == NULL) 
+         return; 
+  
+    // Luu gi? node k? ti?p c?a node c?n xóa
+    struct Node *next = temp->next->next; 
+  
+    // Gi?i phóng node c?n xóa
+    free(temp->next);  
+  
+    // C?p nh?t con tr? sau c?a node tru?c node c?n xóa
+    temp->next = next;  
+}
+
+int main() 
+{
+  struct Node* head = NULL;
+  int data, pos;
+
+  // T?o danh sách liên k?t t? d? li?u du?c nh?p vào t? bàn phím
+  for (int i = 0; i < 4; i++) {
+    printf("Nhap vao gia tri cho node thu %d: ", i+1);
+    scanf("%d", &data);
+    push(&head, data);
+  }
+
+  printf("Danh sach lien ket ban dau: "); 
+  printList(head); 
+
+  // Xóa node t?i v? trí du?c nh?p t? bàn phím
+  printf("\nNhap vao vi tri cua node can xoa: ");
+  scanf("%d", &pos);
+  deleteNode(&head, pos-1);
+
+  printf("Danh sach lien ket sau khi xoa node tai vi tri %d: ", pos);
+  printList(head); 
+
+  return 0; 
+}
+## ...
