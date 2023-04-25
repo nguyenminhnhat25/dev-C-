@@ -291,15 +291,20 @@ void deleteNode(struct Node** head_ref, int position)
 int main() 
 {
   struct Node* head = NULL;
-  int data, pos;
+  int data, pos, n;
 
-  // T?o danh sách liên k?t t? d? li?u du?c nh?p vào t? bàn phím
-  for (int i = 0; i < 4; i++) {
+  // Nh?p s? lu?ng node c?a danh sách
+  printf("Nhap so luong node cua danh sach: ");
+  scanf("%d", &n);
+
+  // T?o danh sách liên k?t t? d? li?u nh?p vào t? bàn phím
+  for (int i = 0; i < n; i++) {
     printf("Nhap vao gia tri cho node thu %d: ", i+1);
     scanf("%d", &data);
     push(&head, data);
   }
 
+  // In ra danh sách liên k?t ban d?u
   printf("Danh sach lien ket ban dau: "); 
   printList(head); 
 
@@ -308,9 +313,11 @@ int main()
   scanf("%d", &pos);
   deleteNode(&head, pos-1);
 
+  // In ra danh sách liên k?t sau khi xóa node
   printf("Danh sach lien ket sau khi xoa node tai vi tri %d: ", pos);
   printList(head); 
 
   return 0; 
 }
+
 ## ...
