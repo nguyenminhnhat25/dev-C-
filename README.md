@@ -2,7 +2,7 @@
 dev c++
 
 
-##them 1 nut vao dau danh sach
+## them 1 nut vao dau danh sach
 #include<stdio.h>
 
 // dinh nghia cau truc cua 1 node
@@ -59,7 +59,7 @@ int main()
         printf("%d\t", p->data);
 }
 
-##them 1 nut vao cuoi danh sach
+## them 1 nut vao cuoi danh sach
 #include <stdio.h>
 #include <stdlib.h>
 
