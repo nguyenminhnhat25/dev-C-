@@ -134,4 +134,88 @@ int main() {
 
     return 0;
 }
+## them 1 node bat ki` vao danh sach lien ket
+#include <stdio.h>
+#include <stdlib.h>
 
+// d?nh nghia cau trúc cua mot node
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+// dinh nghia cau trúc cua danh sách liên ket
+struct LinkedList {
+    struct Node *head;
+    struct Node *tail;
+};
+
+// hàm tao mot node moi
+struct Node *createNode(int data) {
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// hàm thêm  mot node vào cuoi danh sách liên ket
+void addToEnd(struct LinkedList *list, int data) {
+    // tao mot node moi
+    struct Node *newNode = createNode(data);
+
+    // kiem tra xem danh sách có rong hay không
+    if (list->head == NULL) {
+        // neu danh sách rong, node moi so là node dau tiên và node cuoi cùng cua danh sách
+        list->head = newNode;
+        list->tail = newNode;
+    } else {
+        // neu danh sách không rong, thêm node moi vào cuoi danh sách
+        list->tail->next = newNode;
+        list->tail = newNode;
+    }
+}
+
+// hàm in ra các giá tri cua danh sách liên ket
+void printList(struct LinkedList *list) {
+    struct Node *current = list->head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    // tao mot  danh sách liên ket rong
+    struct LinkedList list;
+    list.head = NULL;
+    list.tail = NULL;
+
+    // nhap so luong node cua danh sách
+    int n;
+    printf("Nhap so luong node cua danh sach: ");
+    scanf("%d", &n);
+
+    // thêm các node vào danh sách
+    for (int i = 0; i < n; i++) {
+        int data;
+        printf("Nhap gia tri cua node %d: ", i + 1);
+        scanf("%d", &data);
+        addToEnd(&list, data);
+    }
+
+    // in ra các gia tri cua danh sách
+    printf("Danh sach vua nhap la: ");
+    printList(&list);
+    
+    // thêm mot node moi vào cuoi danh sách
+    int newData;
+    printf("\nNhap gia tri cua node moi: ");
+    scanf("%d", &newData);
+    addToEnd(&list, newData);
+
+    // in ra các gia tri cua danh sách sau khi thêm node moi
+    printf("Danh sach sau khi them node moi: ");
+    printList(&list);
+
+    return 0;
+}
