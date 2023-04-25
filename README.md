@@ -168,11 +168,11 @@ void push(struct Node** head_ref, int new_data)
 
 void insertNode(struct Node** head_ref, int new_data, int position) 
 { 
-    // T?o node m?i
+    // Tạo node mới
     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
     new_node->data = new_data; 
   
-    // N?u danh sách r?ng ho?c position là 0
+    // Nếu danh sách rỗng hoặc position là 0
     if (*head_ref == NULL || position == 0) 
     { 
         new_node->next = *head_ref; 
@@ -180,16 +180,16 @@ void insertNode(struct Node** head_ref, int new_data, int position)
         return; 
     } 
   
-    // Tìm node tru?c v? trí c?n chèn
+    // Tìm node trước vị trí cần chèn
     struct Node* prev = *head_ref; 
     for (int i=0; prev!=NULL && i<position-1; i++) 
          prev = prev->next; 
   
-    // N?u position l?n hon s? lu?ng node trong danh sách
+    // Nếu position lớn hơn số lượng node trong danh sách
     if (prev == NULL) 
          return; 
   
-    // Thêm node m?i vào danh sách liên k?t
+    // Thêm node mới vào danh sách liên kết
     new_node->next = prev->next; 
     prev->next = new_node; 
 } 
@@ -197,10 +197,14 @@ void insertNode(struct Node** head_ref, int new_data, int position)
 int main() 
 {
   struct Node* head = NULL;
-  int data, pos;
+  int data, pos, n;
 
-  // T?o danh sách liên k?t t? d? li?u du?c nh?p vào t? bàn phím
-  for (int i = 0; i < 4; i++) {
+  // Nhập số lượng node của danh sách
+  printf("Nhap so luong node cua danh sach: ");
+  scanf("%d", &n);
+
+  // Tạo danh sách liên kết từ dữ liệu được nhập vào từ bàn phím
+  for (int i = 0; i < n; i++) {
     printf("Nhap vao gia tri cho node thu %d: ", i+1);
     scanf("%d", &data);
     push(&head, data);
@@ -209,7 +213,7 @@ int main()
   printf("Danh sach lien ket ban dau: "); 
   printList(head); 
 
-  // Thêm node vào v? trí du?c nh?p t? bàn phím
+  // Thêm node vào vị trí được nhập từ bàn phím
   printf("\nNhap vao vi tri cua node can them: ");
   scanf("%d", &pos);
   printf("Nhap vao gia tri cho node moi: ");
@@ -221,6 +225,7 @@ int main()
 
   return 0; 
 }
+
 ## xoa 1 node bat ki
 #include <stdio.h>
 #include <stdlib.h>
